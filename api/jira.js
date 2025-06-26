@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 // !!! 重要：将下面的 YOUR_FEISHU_HOOK_URL 替换为您在第一步中从飞书获取的 Webhook 地址
-const FEISHU_WEBHOOK_URL = 'https://open.feishu.cn/open-apis/bot/v2/hook/fff55309-dd52-4127-b32f-7996ef76e6be';
+const FEISHU_WEBHOOK_URL = 'https://open.feishu.cn/open-apis/bot/v2/hook/04091b5e-a8a7-4264-9b2d-f62148ed87d7';
 
 /**
  * Vercel Serverless Function to handle Jira Webhooks.
