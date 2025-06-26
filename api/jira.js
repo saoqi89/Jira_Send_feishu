@@ -3,12 +3,8 @@ const axios = require('axios');
 // !!! 重要：将下面的 YOUR_FEISHU_HOOK_URL 替换为您在第一步中从飞书获取的 Webhook 地址
 const FEISHU_WEBHOOK_URL = 'https://open.feishu.cn/open-apis/bot/v2/hook/04091b5e-a8a7-4264-9b2d-f62148ed87d7';
 
-/**
- * Vercel Serverless Function to handle Jira Webhooks.
- * @param {import('@vercel/node').VercelRequest} request
- * @param {import('@vercel/node').VercelResponse} response
- */
-export default async function handler(request, response) {
+// 使用 module.exports 导出函数
+module.exports = async (request, response) => {
     // 只接受 POST 请求
     if (request.method !== 'POST') {
         return response.status(405).send('Method Not Allowed');
@@ -42,7 +38,7 @@ export default async function handler(request, response) {
         const fromStatus = statusChange.fromString;
         const toStatus = statusChange.toString;
 
-        // 4. 构建飞书卡片消息（比纯文本更美观）
+        // 4. 构建飞书卡片消息
         const feishuCard = {
             "msg_type": "interactive",
             "card": {
@@ -76,7 +72,7 @@ export default async function handler(request, response) {
         return response.status(200).send('Notification sent to Feishu successfully.');
 
     } catch (error) {
-        console.error('Error processing Jira webhook:', error.message);
+        console.error('Error processing Jira webhook:', error.message, error.stack);
         return response.status(500).send('Internal Server Error');
     }
-}
+};
